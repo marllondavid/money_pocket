@@ -55,7 +55,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   title: Text(
                     tr.title,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     DateFormat('d MMM y').format(tr.date),
@@ -68,7 +68,7 @@ class TransactionList extends StatelessWidget {
                         )
                       : IconButton(
                           icon: const Icon(Icons.delete),
-                          color: Theme.of(context).errorColor,
+                          color: Colors.green,
                           onPressed: () => onRemove(tr.id),
                         ),
                 ),
