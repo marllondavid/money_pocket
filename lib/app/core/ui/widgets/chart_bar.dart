@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_pocket/app/core/ui/constants.dart';
 
 class ChartBar extends StatelessWidget {
   const ChartBar({
@@ -46,7 +47,7 @@ class ChartBar extends StatelessWidget {
                   heightFactor: percentage,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 143, 93, 230),
+                      color: ColorsConstants.green,
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
