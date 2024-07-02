@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:money_pocket/core/ui/widgets/chart_bar.dart';
-import 'package:money_pocket/models/transaction.dart';
+import 'package:money_pocket/app/core/ui/widgets/chart_bar.dart';
+import 'package:money_pocket/app/models/transaction.dart';
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTransaction;
@@ -9,6 +9,8 @@ class Chart extends StatelessWidget {
   const Chart(this.recentTransaction, {super.key});
 
   List<Map<String, Object>> get groupedTransactions {
+    final DateFormat dateFormat = DateFormat.E('pt_BR');
+
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(
         Duration(days: index),
@@ -27,7 +29,7 @@ class Chart extends StatelessWidget {
       }
 
       return {
-        'day': DateFormat.E().format(weekDay)[0],
+        'day': dateFormat.format(weekDay)[0].toUpperCase(),
         'value': totalSum,
       };
     }).reversed.toList();
@@ -42,6 +44,7 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       elevation: 6,
       margin: const EdgeInsets.all(20),
       child: Padding(

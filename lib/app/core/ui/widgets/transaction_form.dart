@@ -1,6 +1,6 @@
-// ignore_for_file: sort_child_properties_last, deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:money_pocket/app/core/ui/constants.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
@@ -14,7 +14,6 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final titleController = TextEditingController();
   final valueController = TextEditingController();
-  // ignore: prefer_typing_uninitialized_variables
   var _selectedDate = DateTime.now();
 
   _submitForm() {
@@ -22,23 +21,43 @@ class _TransactionFormState extends State<TransactionForm> {
     final value = double.tryParse(valueController.text) ?? 0.0;
 
     if (title.isEmpty || value <= 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Por favor, preencha todos os campos.'),
+          backgroundColor: ColorsConstants.green,
+        ),
+      );
       return;
     }
 
     widget.onSubmit(title, value, _selectedDate);
   }
 
-  _showDatePicker() {
+  _presentDatePicker() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
+      firstDate: DateTime(2022),
       lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: ColorsConstants.green,
+              onPrimary: Colors.white,
+              surface: Colors.white,
+              onSurface: Colors.black,
+            ),
+            dialogBackgroundColor: Colors.white,
+          ),
+          child: child!,
+        );
+      },
+      locale: const Locale('pt', 'BR'),
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
       }
-
       setState(() {
         _selectedDate = pickedDate;
       });
@@ -61,40 +80,34 @@ class _TransactionFormState extends State<TransactionForm> {
             children: [
               TextField(
                 controller: titleController,
-                onSubmitted: (value) => _submitForm(),
                 decoration: const InputDecoration(
-                  labelText: 'Título',
+                  labelText: 'Nome da despesa',
                 ),
               ),
               TextField(
                 controller: valueController,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
-                onSubmitted: (value) => _submitForm(),
                 decoration: const InputDecoration(
                   labelText: 'Valor (R\$)',
                 ),
               ),
-              // ignore: sized_box_for_whitespace
-              Container(
+              SizedBox(
                 height: 70,
                 child: Row(
-                  children: <Widget>[
-                    // ignore: unnecessary_null_comparison
+                  children: [
                     Expanded(
                       child: Text(
-                        // ignore: unnecessary_null_comparison
-                        _selectedDate == null
-                            ? 'Nenhuma data selecionada!'
-                            : 'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
+                        'Data selecionada: ${DateFormat('dd/MM/y').format(_selectedDate)}',
                       ),
                     ),
                     TextButton(
-                      onPressed: () => _showDatePicker,
+                      onPressed: _presentDatePicker,
                       child: const Text(
                         'Selecionar data',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: ColorsConstants.green,
                         ),
                       ),
                     ),
@@ -105,8 +118,17 @@ class _TransactionFormState extends State<TransactionForm> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    onPressed: () => _submitForm,
-                    child: const Text('Nova Transação'),
+                    onPressed: _submitForm,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorsConstants.green,
+                    ),
+                    child: const Text(
+                      'Nova Despesa',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),

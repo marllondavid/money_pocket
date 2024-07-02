@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:money_pocket/models/transaction.dart';
+import 'package:money_pocket/app/core/ui/constants.dart';
+import 'package:money_pocket/app/models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -12,25 +13,21 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isEmpty
-        ? LayoutBuilder(
-            builder: (context, constraints) {
-              return Column(
-                children: <Widget>[
-                  Text(
-                    'Nenhuma Transação Cadastrada!',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  SizedBox(height: constraints.maxHeight * 0.05),
-                  SizedBox(
-                    height: constraints.maxHeight * 0.6,
-                    child: Image.asset(
-                      'assets/images/waiting.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ],
-              );
-            },
+        ? Column(
+            children: [
+              const Text(
+                'Nenhuma Transação Cadastrada!',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              Image.asset(
+                ImageConstants.imageSlep,
+                fit: BoxFit.fill,
+              ),
+            ],
           )
         : ListView.builder(
             itemCount: transactions.length,
@@ -45,7 +42,7 @@ class TransactionList extends StatelessWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundColor: const Color.fromARGB(255, 143, 93, 230),
+                    backgroundColor: Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: FittedBox(
@@ -55,7 +52,7 @@ class TransactionList extends StatelessWidget {
                   ),
                   title: Text(
                     tr.title,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   subtitle: Text(
                     DateFormat('d MMM y').format(tr.date),
@@ -68,7 +65,7 @@ class TransactionList extends StatelessWidget {
                         )
                       : IconButton(
                           icon: const Icon(Icons.delete),
-                          color: Theme.of(context).errorColor,
+                          color: Theme.of(context).colorScheme.error,
                           onPressed: () => onRemove(tr.id),
                         ),
                 ),
