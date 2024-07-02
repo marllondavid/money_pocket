@@ -36,3 +36,14 @@ Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e enviar pull requests.
 
 Esperamos que o DinDin Pocket ajude você a gerenciar melhor seus gastos semanais!
+
+![Lista de contas](https://github.com/marllondavid/money_pocket/assets/110509799/d964d69d-bb3d-4f7a-9789-a12ae367e7ec)
+![calendar](https://github.com/marllondavid/money_pocket/assets/110509799/293a5c93-33f3-479d-b74b-aa114eee5c6e)
+![add transaction](https://github.com/marllondavid/money_pocket/assets/110509799/f21d8ada-c1dc-4812-b5ec-f6152d744208)
+![homepage](https://github.com/marllondavid/money_pocket/assets/110509799/37023895-4927-47d5-8132-07ed65658c47)
+![cadastrar pessoa](https://github.com/marllondavid/money_pocket/assets/110509799/b1f22045-7f5d-4993-801d-e23da69c1829)
+![esqueceu senha](https://github.com/marllondavid/money_pocket/assets/110509799/d4406554-43f8-466d-8530-4e5f2c6e607e)
+![loginpage](https://github.com/marllondavid/money_pocket/assets/110509799/b4009cbd-c983-4f49-bbfd-eb2ffc7383b2)
+
+
+
